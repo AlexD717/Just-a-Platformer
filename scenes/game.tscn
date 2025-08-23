@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://d4k4q337r3ycd"]
+[gd_scene load_steps=6 format=4 uid="uid://d4k4q337r3ycd"]
 
 [ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dgujiyjnej62b" path="res://assets/Spritesheets/spritesheet-tiles-default.png" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bts8o5poooql" path="res://scenes/coin.tscn" id="3_lnu2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -526,15 +527,23 @@ sources/1 = SubResource("TileSetAtlasSource_lnu2h")
 
 [node name="Game" type="Node2D"]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_uwrxv")]
+[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+z_index = 5
 position = Vector2(474, -171)
 CAYOTE_TIME = 150.0
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(3, 3)
 offset = Vector2(0, -61.385)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = 10
 position = Vector2(1, 0)
 tile_map_data = PackedByteArray("AAD9/wEAAQAHAAcAAAD+/wEAAQAHAAYAAAD//wEAAQAHAAYAAAAAAAEAAQAHAAYAAAABAAEAAQAHAAYAAAACAAEAAQAHAAYAAAADAAEAAQAHAAYAAAAEAAEAAQAHAAYAAAAFAAEAAQAHAAYAAAAGAAEAAQAHAAYAAAAHAAEAAQAHAAYAAAAIAAEAAQAHAAYAAAAJAAEAAQAHAAYAAAAKAAEAAQAHAAYAAAALAAEAAQAHAAMAAAALAAAAAQAHAAcAAAAMAAAAAQAHAAYAAAANAAAAAQAHAAYAAAAOAAAAAQAHAAMAAAA=")
 tile_set = SubResource("TileSet_uwrxv")
+
+[node name="Coin" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(872, -66)
+
+[node name="Coin2" parent="." instance=ExtResource("3_lnu2h")]
+position = Vector2(744, -69)

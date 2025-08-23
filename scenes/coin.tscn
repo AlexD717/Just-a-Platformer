@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bts8o5poooql"]
+
+[ext_resource type="Texture2D" uid="uid://yai8avwtq2ld" path="res://assets/Spritesheets/spritesheet-tiles-double.png" id="1_rwqht"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
+atlas = ExtResource("1_rwqht")
+region = Rect2(1920, 1024, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11l1o"]
+atlas = ExtResource("1_rwqht")
+region = Rect2(1920, 1152, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d14el"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i64fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11l1o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rwqht"]
+radius = 33.6341
+
+[node name="Coin" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d14el")
+autoplay = "default"
+frame_progress = 0.309738
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 1)
+shape = SubResource("CircleShape2D_rwqht")

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var SPEED: int = 500
 @export var JUMP_VELOCITY: int = -450
-@export var CAYOTE_TIME: float = 100
+@export var CAYOTE_TIME: float = 150
 
 var lastGroundedTime: int = 0
 var isGrounded: bool = false
