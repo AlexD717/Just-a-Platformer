@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://d4k4q337r3ycd"]
+[gd_scene load_steps=9 format=4 uid="uid://d4k4q337r3ycd"]
 
 [ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dgujiyjnej62b" path="res://assets/Spritesheets/spritesheet-tiles-default.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bts8o5poooql" path="res://scenes/coin.tscn" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://3rcrc2alclga" path="res://scenes/kill_area.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c28oq5shq05qb" path="res://scenes/spikes.tscn" id="5_iywne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -251,6 +252,7 @@ texture_region_size = Vector2i(64, 64)
 9:8/0 = 0
 9:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 10:8/0 = 0
+10:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.9347, -0.950928, 17.5922, -0.894991, 30.7373, 32, -31.2408, 32)
 11:8/0 = 0
 12:8/0 = 0
 13:8/0 = 0
@@ -554,6 +556,13 @@ position = Vector2(744, -69)
 
 [node name="KillArea" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(0, 260)
+doKillAnimation = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]
 shape = SubResource("WorldBoundaryShape2D_iywne")
+
+[node name="Spikes" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(605, 64)
+
+[node name="Spikes2" parent="." instance=ExtResource("5_iywne")]
+position = Vector2(541, 64)
