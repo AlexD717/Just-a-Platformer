@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://d4k4q337r3ycd"]
+[gd_scene load_steps=8 format=4 uid="uid://d4k4q337r3ycd"]
 
 [ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dgujiyjnej62b" path="res://assets/Spritesheets/spritesheet-tiles-default.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bts8o5poooql" path="res://scenes/coin.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://3rcrc2alclga" path="res://scenes/kill_area.tscn" id="4_lbhrr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -525,6 +526,8 @@ terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_lnu2h")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iywne"]
+
 [node name="Game" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
@@ -535,6 +538,7 @@ CAYOTE_TIME = 150.0
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(3, 3)
 offset = Vector2(0, -61.385)
+limit_bottom = 240
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = 10
@@ -547,3 +551,9 @@ position = Vector2(872, -66)
 
 [node name="Coin2" parent="." instance=ExtResource("3_lnu2h")]
 position = Vector2(744, -69)
+
+[node name="KillArea" parent="." instance=ExtResource("4_lbhrr")]
+position = Vector2(0, 260)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]
+shape = SubResource("WorldBoundaryShape2D_iywne")
