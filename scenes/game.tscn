@@ -542,27 +542,36 @@ position = Vector2(3, 3)
 offset = Vector2(0, -61.385)
 limit_bottom = 240
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Ground" type="TileMapLayer" parent="."]
 z_index = 10
-position = Vector2(1, 0)
-tile_map_data = PackedByteArray("AAD9/wEAAQAHAAcAAAD+/wEAAQAHAAYAAAD//wEAAQAHAAYAAAAAAAEAAQAHAAYAAAABAAEAAQAHAAYAAAACAAEAAQAHAAYAAAADAAEAAQAHAAYAAAAEAAEAAQAHAAYAAAAFAAEAAQAHAAYAAAAGAAEAAQAHAAYAAAAHAAEAAQAHAAYAAAAIAAEAAQAHAAYAAAAJAAEAAQAHAAYAAAAKAAEAAQAHAAYAAAALAAEAAQAHAAMAAAALAAAAAQAHAAcAAAAMAAAAAQAHAAYAAAANAAAAAQAHAAYAAAAOAAAAAQAHAAMAAAA=")
+position = Vector2(-69, 2)
+tile_map_data = PackedByteArray("AAD9/wEAAQAHAAcAAAD+/wEAAQAHAAYAAAD//wEAAQAHAAYAAAAAAAEAAQAHAAYAAAABAAEAAQAHAAYAAAACAAEAAQAHAAYAAAADAAEAAQAHAAYAAAAEAAEAAQAHAAYAAAAFAAEAAQAHAAYAAAAGAAEAAQAHAAYAAAAHAAEAAQAHAAYAAAAIAAEAAQAHAAYAAAAJAAEAAQAHAAYAAAAKAAEAAQAHAAYAAAALAAEAAQAHAAMAAAALAAAAAQAHAAcAAAAMAAAAAQAHAAYAAAANAAAAAQAHAAMAAAAQAP7/AQAHAAcAAAARAP7/AQAHAAYAAAASAP7/AQAHAAYAAAATAP7/AQAHAAMAAAAWAP3/AQAIAAQAAAAUAPv/AQAHAAMAAAATAPv/AQAHAAcAAAARAPn/AQAHAAMAAAAQAPn/AQAHAAYAAAAPAPn/AQAHAAYAAAAOAPn/AQAHAAcAAAA=")
 tile_set = SubResource("TileSet_uwrxv")
 
-[node name="Coin" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(872, -66)
+[node name="Background" type="TileMapLayer" parent="."]
 
-[node name="Coin2" parent="." instance=ExtResource("3_lnu2h")]
-position = Vector2(744, -69)
-
-[node name="KillArea" parent="." instance=ExtResource("4_lbhrr")]
+[node name="World Edge" parent="." instance=ExtResource("4_lbhrr")]
 position = Vector2(0, 260)
 doKillAnimation = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KillArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World Edge"]
 shape = SubResource("WorldBoundaryShape2D_iywne")
 
-[node name="Spikes" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(605, 64)
+[node name="Coins" type="Node" parent="."]
 
-[node name="Spikes2" parent="." instance=ExtResource("5_iywne")]
-position = Vector2(541, 64)
+[node name="Coin" parent="Coins" instance=ExtResource("3_lnu2h")]
+position = Vector2(872, -66)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("3_lnu2h")]
+position = Vector2(744, -69)
+
+[node name="Level Design" type="Node" parent="."]
+
+[node name="Spikes" parent="Level Design" instance=ExtResource("5_iywne")]
+position = Vector2(171, 64)
+
+[node name="Spikes2" parent="Level Design" instance=ExtResource("5_iywne")]
+position = Vector2(107, 64)
+
+[node name="Spikes3" parent="Level Design" instance=ExtResource("5_iywne")]
+position = Vector2(1186, -317)

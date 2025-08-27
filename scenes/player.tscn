@@ -1,13 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://dic7kw2u0oo3r"]
+[gd_scene load_steps=10 format=3 uid="uid://dic7kw2u0oo3r"]
 
 [ext_resource type="Script" uid="uid://bfd5h51upq6iu" path="res://scripts/PlayerMovement.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://s5nthibr8mtu" path="res://assets/Sprites/Characters/Default/character_green_walk_a.png" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://5tnhqjqqg58r" path="res://assets/Sprites/Characters/Default/character_green_idle.png" id="1_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cphnxerhfkavj" path="res://assets/Sprites/Characters/Default/character_green_hit.png" id="2_fjrip"]
 [ext_resource type="Texture2D" uid="uid://bi0axprfdfpkx" path="res://assets/Sprites/Characters/Default/character_green_walk_b.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://dunbtg3wr58jy" path="res://assets/Sprites/Characters/Default/character_green_jump.png" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://bl34at2842n78" path="res://scripts/PlayerHealth.gd" id="5_qlg0r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dqkch"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fjrip")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_qhqgy")
@@ -18,13 +28,21 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_tuyoq")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_g2els")
 }, {
 "duration": 1.0,
 "texture": ExtResource("2_qhqgy")
 }],
 "loop": true,
-"name": &"running",
+"name": &"run",
 "speed": 7.0
 }]
 
@@ -34,17 +52,18 @@ height = 84.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_dqkch")
+JUMP_VELOCITY = -500
 CAYOTE_TIME = 250.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -64)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"idle"
+animation = &"hit"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, -45)
 shape = SubResource("CapsuleShape2D_qhqgy")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="PlayerHealth" type="Node2D" parent="."]
 script = ExtResource("5_qlg0r")

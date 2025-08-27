@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY: int = -450
 @export var CAYOTE_TIME: float = 150
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var playerHealth: PlayerHealth = $PlayerHealth
+
 var lastGroundedTime: int = 0
 var isGrounded: bool = false
 
@@ -22,12 +25,29 @@ func _physics_process(delta: float) -> void:
 		lastGroundedTime = Time.get_ticks_msec()
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and CanJump():
+	if Input.is_action_just_pressed("Jump") and CanJump():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction: float = Input.get_axis("ui_left", "ui_right")
+	# Get the input direction
+	var direction: float = Input.get_axis("MoveLeft", "MoveRight")
+
+	# Flip the sprite based on direction
+	if (direction > 0):
+		sprite.flip_h = false
+	elif (direction < 0):
+		sprite.flip_h = true
+	
+	# Apply animation
+	if (playerHealth.playerHasDied):
+		sprite.animation = "hit"
+	elif (not isGrounded):
+		sprite.animation = "jump"
+	elif (abs(direction) > 0):
+		sprite.animation = "run"
+	else:
+		sprite.animation = "idle"
+
+	# Apply movement
 	if direction:
 		velocity.x = direction * SPEED
 	else:

@@ -12,9 +12,9 @@ func playerDied(doKillAnimation: bool) -> void:
 	playerHasDied = true
 	if (doKillAnimation):
 		var parentBody: CharacterBody2D = get_parent()
-		parentBody.get_node("CollisionShape2D").queue_free()
+		parentBody.get_node("CollisionShape2D").call_deferred("queue_free")
 		var animatedSprite: AnimatedSprite2D = parentBody.get_node("AnimatedSprite2D")
-		animatedSprite.z_index = 10000
+		animatedSprite.z_index = 100
 		animatedSprite.modulate.a = 0.5
 		parentBody.velocity.y = -upwardForceOnDeath
 		await get_tree().create_timer(killDelay).timeout
