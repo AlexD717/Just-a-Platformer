@@ -47,7 +47,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
-radius = 21.0
+radius = 25.0
 height = 84.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
@@ -58,7 +58,7 @@ CAYOTE_TIME = 250.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -64)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"hit"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
