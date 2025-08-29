@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqp7ywgf5sqw2"]
+
+[sub_resource type="GDScript" id="GDScript_rf3rd"]
+script/source = "extends Node2D
+
+enum MovementMode { LOOP, PING_PONG, STOP }
+
+@export var speed: float = 100.0
+@export var movement_mode: MovementMode = MovementMode.LOOP
+@export var threshold: float = 5.0
+
+# This is editable in the inspector on the root node
+@export var waypoint_nodes: Array[NodePath] = []
+
+var waypoints: Array[Vector2] = []
+var current_target := 0
+var direction := 1   # 1 = forward, -1 = backward
+
+func _ready() -> void:
+    # Convert NodePaths to global positions
+    waypoints.clear()
+    for path in waypoint_nodes:
+        var wp = get_node(path)
+        if wp:
+            waypoints.append(wp.global_position)
+
+    if waypoints.size() > 0:
+        global_position = waypoints[0]
+
+func _physics_process(delta: float) -> void:
+    if waypoints.size() < 2 or speed <= 0:
+        return
+
+    var target = waypoints[current_target]
+    var to_target = target - global_position
+
+    if to_target.length() <= threshold:
+        _advance_waypoint()
+    else:
+        global_position += to_target.normalized() * speed * delta
+
+func _advance_waypoint() -> void:
+    match movement_mode:
+        MovementMode.LOOP:
+            current_target = (current_target + 1) % waypoints.size()
+
+        MovementMode.PING_PONG:
+            current_target += direction
+            if current_target >= waypoints.size():
+                direction = -1
+                current_target = waypoints.size() - 2
+            elif current_target < 0:
+                direction = 1
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_rf3rd")
