@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://d4k4q337r3ycd"]
+[gd_scene load_steps=19 format=4 uid="uid://d4k4q337r3ycd"]
 
 [ext_resource type="Script" uid="uid://b5fg2ojy0cweq" path="res://scripts/GameManager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://3rcrc2alclga" path="res://scenes/kill_area.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://c28oq5shq05qb" path="res://scenes/spikes.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://chigu4x6jb1ui" path="res://scenes/saw.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://7ayywt3nkgg2" path="res://scenes/flag.tscn" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -555,22 +556,38 @@ sources/3 = SubResource("TileSetAtlasSource_p57ef")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iywne"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
+bg_color = Color(0.101961, 0.172549, 0.184314, 0.721569)
+
+[sub_resource type="GDScript" id="GDScript_0tnpc"]
+script/source = "extends Button
+
+"
+
 [sub_resource type="Curve2D" id="Curve2D_u5sy4"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -253, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 3
 
+[sub_resource type="Curve2D" id="Curve2D_gee14"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -300, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 3
+
 [node name="Game" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("label")]
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("label", "winPanel", "winScore")]
 unique_name_in_owner = true
 script = ExtResource("1_gee14")
 label = NodePath("../CanvasLayer/Label")
+winPanel = NodePath("../CanvasLayer/WinPanel/Panel")
+winScore = NodePath("../CanvasLayer/WinPanel/Panel/Coins Got")
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 z_index = 5
-position = Vector2(260, 61)
+position = Vector2(-334, -717)
 CAYOTE_TIME = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -582,7 +599,7 @@ limit_bottom = 240
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = 10
 position = Vector2(-69, 1)
-tile_map_data = PackedByteArray("AAD9/wEAAQAHAAcAAAD+/wEAAQAHAAYAAAD//wEAAQAHAAYAAAAAAAEAAQAHAAYAAAABAAEAAQAHAAYAAAACAAEAAQAHAAYAAAADAAEAAQAHAAYAAAAEAAEAAQAHAAYAAAAFAAEAAQAHAAYAAAAGAAEAAQAHAAYAAAAHAAEAAQAHAAYAAAAIAAEAAQAHAAYAAAAJAAEAAQAHAAYAAAAKAAEAAQAHAAYAAAALAAEAAQAHAAMAAAAMAAAAAQAHAAcAAAANAAAAAQAHAAMAAAAQAP7/AQAHAAcAAAARAP7/AQAHAAYAAAASAP7/AQAHAAMAAAAWAP3/AQAHAAcAAAAUAPv/AQAHAAMAAAATAPv/AQAHAAcAAAARAPn/AQAHAAMAAAAQAPn/AQAHAAYAAAAPAPn/AQAHAAYAAAAOAPn/AQAHAAcAAAAXAP3/AQAHAAYAAAAYAP3/AQAHAAMAAAALAPj/AQAIAAQAAAAOAPb/AQAHAAMAAAANAPb/AQAHAAcAAAAHAPj/AQAHAAMAAAATAP//AQAHAAcAAAAUAP//AQAHAAYAAAAVAP//AQAHAAMAAAAGAPj/AQAHAAYAAAAFAPj/AQAHAAcAAAA=")
+tile_map_data = PackedByteArray("AAD9/wEAAQAHAAcAAAD+/wEAAQAHAAYAAAD//wEAAQAHAAYAAAAAAAEAAQAHAAYAAAABAAEAAQAHAAYAAAACAAEAAQAHAAYAAAADAAEAAQAHAAYAAAAEAAEAAQAHAAYAAAAFAAEAAQAHAAYAAAAGAAEAAQAHAAYAAAAHAAEAAQAHAAYAAAAIAAEAAQAHAAYAAAAJAAEAAQAHAAYAAAAKAAEAAQAHAAYAAAALAAEAAQAHAAMAAAAMAAAAAQAHAAcAAAANAAAAAQAHAAMAAAAQAP7/AQAHAAcAAAARAP7/AQAHAAYAAAASAP7/AQAHAAMAAAAWAP3/AQAHAAcAAAAUAPv/AQAHAAMAAAATAPv/AQAHAAcAAAARAPn/AQAHAAMAAAAQAPn/AQAHAAYAAAAPAPn/AQAHAAYAAAAOAPn/AQAHAAcAAAAXAP3/AQAHAAYAAAAYAP3/AQAHAAMAAAALAPj/AQAIAAQAAAAOAPb/AQAHAAMAAAANAPb/AQAHAAcAAAAHAPj/AQAHAAMAAAATAP//AQAHAAcAAAAUAP//AQAHAAYAAAAVAP//AQAHAAMAAAAGAPj/AQAHAAYAAAAFAPj/AQAHAAYAAAAEAPj/AQAHAAYAAAADAPj/AQAHAAYAAAACAPj/AQAHAAYAAAABAPj/AQAHAAcAAAD///f/AQAHAAMAAAD+//f/AQAHAAcAAAD8//X/AQAHAAMAAAD7//X/AQAHAAYAAAD6//X/AQAHAAYAAAD5//X/AQAHAAYAAAD4//X/AQAHAAcAAAA=")
 tile_set = SubResource("TileSet_uwrxv")
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -598,6 +615,57 @@ doKillAnimation = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World Edge"]
 shape = SubResource("WorldBoundaryShape2D_iywne")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+z_index = 100
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 407.0
+offset_bottom = 203.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Score: 0"
+
+[node name="WinPanel" type="Node" parent="CanvasLayer"]
+process_mode = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer/WinPanel"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0tnpc")
+
+[node name="You Won!" type="Label" parent="CanvasLayer/WinPanel/Panel"]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 67.0
+offset_right = 1346.0
+offset_bottom = 276.0
+theme_override_font_sizes/font_size = 128
+text = "You Won!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Coins Got" type="Label" parent="CanvasLayer/WinPanel/Panel"]
+offset_left = 407.0
+offset_top = 382.0
+offset_right = 1492.0
+offset_bottom = 591.0
+theme_override_font_sizes/font_size = 96
+text = "Coins Collected: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main Menu" type="Button" parent="CanvasLayer/WinPanel/Panel"]
+layout_mode = 0
+offset_left = 675.0
+offset_top = 720.0
+offset_right = 1168.0
+offset_bottom = 875.0
+theme_override_font_sizes/font_size = 80
+text = "Main Menu"
+script = SubResource("GDScript_0tnpc")
 
 [node name="Coins" type="Node" parent="."]
 
@@ -622,45 +690,55 @@ position = Vector2(791, -700)
 [node name="Coin7" parent="Coins" instance=ExtResource("3_lnu2h")]
 position = Vector2(287, -564)
 
-[node name="Level Design" type="Node" parent="."]
+[node name="Spikes" type="Node" parent="."]
 
-[node name="Spikes" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(171, 67)
 
-[node name="Spikes2" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes2" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(107, 67)
 
-[node name="Spikes3" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes3" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(1186, -317)
 
-[node name="Spikes4" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes4" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(1182, -59)
 
-[node name="Spikes5" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes5" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(1492, -187)
 
-[node name="Spikes6" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes6" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(991, -446)
 
-[node name="Spikes7" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes7" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(850, -637)
 
-[node name="Spikes8" parent="Level Design" instance=ExtResource("5_iywne")]
+[node name="Spikes8" parent="Spikes" instance=ExtResource("5_iywne")]
 position = Vector2(882, -607)
 rotation = 1.57079
 
-[node name="Saw" parent="." instance=ExtResource("7_u5sy4")]
+[node name="Spikes9" parent="Spikes" instance=ExtResource("5_iywne")]
+position = Vector2(31, -509)
+
+[node name="Spikes10" parent="Spikes" instance=ExtResource("5_iywne")]
+position = Vector2(-110, -574)
+
+[node name="Spikes11" parent="Spikes" instance=ExtResource("5_iywne")]
+position = Vector2(-79, -543)
+rotation = 1.57079
+
+[node name="Saw" type="Node" parent="."]
+
+[node name="Saw" parent="Saw" instance=ExtResource("7_u5sy4")]
 position = Vector2(626, 65)
 curve = SubResource("Curve2D_u5sy4")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Saw2" parent="Saw" instance=ExtResource("7_u5sy4")]
+position = Vector2(392, -511)
+curve = SubResource("Curve2D_gee14")
+speed = 120.0
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-z_index = 100
-offset_left = 17.0
-offset_top = 15.0
-offset_right = 407.0
-offset_bottom = 203.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "Score: 0"
+[node name="Flag" parent="." instance=ExtResource("9_0tnpc")]
+position = Vector2(-490, -732)
+
+[connection signal="pressed" from="CanvasLayer/WinPanel/Panel/Main Menu" to="GameManager" method="_on_main_menu_pressed"]
