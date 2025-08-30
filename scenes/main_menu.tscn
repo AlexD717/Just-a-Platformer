@@ -1,17 +1,17 @@
-[gd_scene load_steps=19 format=4 uid="uid://d4k4q337r3ycd"]
+[gd_scene load_steps=18 format=4 uid="uid://b57v10h0guv8c"]
 
-[ext_resource type="Script" uid="uid://b5fg2ojy0cweq" path="res://scripts/GameManager.gd" id="1_gee14"]
-[ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="1_uwrxv"]
-[ext_resource type="Texture2D" uid="uid://dgujiyjnej62b" path="res://assets/Spritesheets/spritesheet-tiles-default.png" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://bts8o5poooql" path="res://scenes/coin.tscn" id="3_lnu2h"]
-[ext_resource type="Texture2D" uid="uid://dwkqogy6vvhrn" path="res://assets/Spritesheets/spritesheet-backgrounds-default.png" id="3_p57ef"]
-[ext_resource type="PackedScene" uid="uid://3rcrc2alclga" path="res://scenes/kill_area.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://c28oq5shq05qb" path="res://scenes/spikes.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://chigu4x6jb1ui" path="res://scenes/saw.tscn" id="7_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://7ayywt3nkgg2" path="res://scenes/flag.tscn" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="2_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://dgujiyjnej62b" path="res://assets/Spritesheets/spritesheet-tiles-default.png" id="3_lgwnu"]
+[ext_resource type="Texture2D" uid="uid://dwkqogy6vvhrn" path="res://assets/Spritesheets/spritesheet-backgrounds-default.png" id="4_flqon"]
+[ext_resource type="Script" uid="uid://c33f7p2ews4t0" path="res://scripts/StartGame.gd" id="5_jk1qb"]
+[ext_resource type="PackedScene" uid="uid://3rcrc2alclga" path="res://scenes/kill_area.tscn" id="5_rcqid"]
+[ext_resource type="PackedScene" uid="uid://bts8o5poooql" path="res://scenes/coin.tscn" id="6_1ajci"]
+[ext_resource type="PackedScene" uid="uid://c28oq5shq05qb" path="res://scenes/spikes.tscn" id="7_7b55j"]
+[ext_resource type="PackedScene" uid="uid://chigu4x6jb1ui" path="res://scenes/saw.tscn" id="8_5pajh"]
+[ext_resource type="PackedScene" uid="uid://7ayywt3nkgg2" path="res://scenes/flag.tscn" id="9_j7ex8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
-texture = ExtResource("2_yqjtg")
+texture = ExtResource("3_lgwnu")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
@@ -533,7 +533,7 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_lnu2h")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p57ef"]
-texture = ExtResource("3_p57ef")
+texture = ExtResource("4_flqon")
 texture_region_size = Vector2i(256, 256)
 0:0/0 = 0
 1:0/0 = 0
@@ -559,11 +559,6 @@ sources/3 = SubResource("TileSetAtlasSource_p57ef")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
 bg_color = Color(0.101961, 0.172549, 0.184314, 0.721569)
 
-[sub_resource type="GDScript" id="GDScript_0tnpc"]
-script/source = "extends Button
-
-"
-
 [sub_resource type="Curve2D" id="Curve2D_u5sy4"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -253, 0, 0, 0, 0, 0, 0, 0)
@@ -576,19 +571,12 @@ _data = {
 }
 point_count = 3
 
-[node name="Game" type="Node2D"]
+[node name="Main Menu" type="Node2D"]
 
-[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("label", "winPanel", "winScore")]
-unique_name_in_owner = true
-script = ExtResource("1_gee14")
-label = NodePath("../CanvasLayer/Label")
-winPanel = NodePath("../CanvasLayer/WinPanel/Panel")
-winScore = NodePath("../CanvasLayer/WinPanel/Panel/Coins Got")
-
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+[node name="Player" parent="." instance=ExtResource("2_5dd4i")]
 z_index = 5
 position = Vector2(291, 66)
-CAYOTE_TIME = 150.0
+script = null
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 visible = false
@@ -609,7 +597,7 @@ tile_map_data = PackedByteArray("AAD8////AwAAAAAAAAD9////AwAAAAAAAAD+////AwAAAAA
 tile_set = SubResource("TileSet_gee14")
 collision_enabled = false
 
-[node name="World Edge" parent="." instance=ExtResource("4_lbhrr")]
+[node name="World Edge" parent="." instance=ExtResource("5_rcqid")]
 position = Vector2(0, 260)
 doKillAnimation = false
 
@@ -618,146 +606,151 @@ shape = SubResource("WorldBoundaryShape2D_iywne")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-z_index = 100
-offset_left = 17.0
-offset_top = 15.0
-offset_right = 407.0
-offset_bottom = 203.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "Score: 0"
-
-[node name="WinPanel" type="Node" parent="CanvasLayer"]
+[node name="Main Panel" type="Node" parent="CanvasLayer"]
 process_mode = 3
 
-[node name="Panel" type="Panel" parent="CanvasLayer/WinPanel"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Main Panel"]
 offset_right = 1150.0
 offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0tnpc")
 
-[node name="You Won!" type="Label" parent="CanvasLayer/WinPanel/Panel"]
+[node name="Title" type="Label" parent="CanvasLayer/Main Panel/Panel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -418.5
-offset_top = 35.0
-offset_right = 418.5
-offset_bottom = 244.0
+offset_left = -521.5
+offset_top = 16.0
+offset_right = 521.5
+offset_bottom = 225.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 128
-text = "You Won!"
+text = "Just a Platformer"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Coins Got" type="Label" parent="CanvasLayer/WinPanel/Panel"]
+[node name="Play" type="Button" parent="CanvasLayer/Main Panel/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -542.5
-offset_top = -104.5
-offset_right = 542.5
-offset_bottom = 104.5
+offset_left = -246.5
+offset_top = -62.0
+offset_right = 246.5
+offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 96
-text = "Coins Collected: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Main Menu" type="Button" parent="CanvasLayer/WinPanel/Panel"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -246.5
-offset_top = -215.0
-offset_right = 246.5
-offset_bottom = -60.0
-grow_horizontal = 2
-grow_vertical = 0
 theme_override_font_sizes/font_size = 80
-text = "Main Menu"
-script = SubResource("GDScript_0tnpc")
+text = "Play"
+script = ExtResource("5_jk1qb")
+
+[node name="Developed By" type="Label" parent="CanvasLayer/Main Panel/Panel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -363.0
+offset_top = -48.0
+offset_right = -9.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Developed by: Alexey Dmitriev"
 
 [node name="Coins" type="Node" parent="."]
 
-[node name="Coin" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(872, -66)
+script = null
 
-[node name="Coin2" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin2" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(744, -69)
+script = null
 
-[node name="Coin3" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin3" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(1246, -381)
+script = null
 
-[node name="Coin4" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin4" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(1376, -380)
+script = null
 
-[node name="Coin5" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin5" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(-208, 12)
+script = null
 
-[node name="Coin6" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin6" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(791, -700)
+script = null
 
-[node name="Coin7" parent="Coins" instance=ExtResource("3_lnu2h")]
+[node name="Coin7" parent="Coins" instance=ExtResource("6_1ajci")]
 position = Vector2(287, -564)
+script = null
 
 [node name="Spikes" type="Node" parent="."]
 
-[node name="Spikes" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(171, 67)
+script = null
 
-[node name="Spikes2" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes2" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(107, 67)
+script = null
 
-[node name="Spikes3" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes3" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(1186, -317)
+script = null
 
-[node name="Spikes4" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes4" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(1182, -59)
+script = null
 
-[node name="Spikes5" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes5" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(1492, -187)
+script = null
 
-[node name="Spikes6" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes6" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(991, -446)
+script = null
 
-[node name="Spikes7" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes7" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(850, -637)
+script = null
 
-[node name="Spikes8" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes8" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(882, -607)
 rotation = 1.57079
+script = null
 
-[node name="Spikes9" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes9" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(31, -509)
+script = null
 
-[node name="Spikes10" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes10" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(-110, -574)
+script = null
 
-[node name="Spikes11" parent="Spikes" instance=ExtResource("5_iywne")]
+[node name="Spikes11" parent="Spikes" instance=ExtResource("7_7b55j")]
 position = Vector2(-79, -543)
 rotation = 1.57079
+script = null
 
 [node name="Saw" type="Node" parent="."]
 
-[node name="Saw" parent="Saw" instance=ExtResource("7_u5sy4")]
+[node name="Saw" parent="Saw" instance=ExtResource("8_5pajh")]
 position = Vector2(626, 65)
 curve = SubResource("Curve2D_u5sy4")
 
-[node name="Saw2" parent="Saw" instance=ExtResource("7_u5sy4")]
+[node name="Saw2" parent="Saw" instance=ExtResource("8_5pajh")]
 position = Vector2(392, -511)
 curve = SubResource("Curve2D_gee14")
 speed = 120.0
 
-[node name="Flag" parent="." instance=ExtResource("9_0tnpc")]
+[node name="Flag" parent="." instance=ExtResource("9_j7ex8")]
 position = Vector2(-490, -732)
-
-[connection signal="pressed" from="CanvasLayer/WinPanel/Panel/Main Menu" to="GameManager" method="_on_main_menu_pressed"]
+script = null

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Just-a-Platformer"
-run/main_scene="uid://d4k4q337r3ycd"
+run/main_scene="uid://b57v10h0guv8c"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,8 +26,6 @@ gdscript/warnings/inferred_declaration=1
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
 window/stretch/mode="viewport"
 
 [editor_plugins]
@@ -63,3 +61,5 @@ MoveRight={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
