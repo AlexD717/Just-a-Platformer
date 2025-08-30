@@ -587,7 +587,7 @@ winScore = NodePath("../CanvasLayer/WinPanel/Panel/Coins Got")
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 z_index = 5
-position = Vector2(-334, -717)
+position = Vector2(291, 66)
 CAYOTE_TIME = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -648,6 +648,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Coins Got" type="Label" parent="CanvasLayer/WinPanel/Panel"]
+layout_mode = 0
 offset_left = 407.0
 offset_top = 382.0
 offset_right = 1492.0
