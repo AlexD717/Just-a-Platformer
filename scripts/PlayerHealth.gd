@@ -4,12 +4,17 @@ class_name PlayerHealth
 @export var killDelay: float = 2
 @export var upwardForceOnDeath: float = 500
 
+@onready var deathSFX: AudioStreamPlayer2D = $"../DeathSFX"
+
 var playerHasDied: bool = false
 
 func playerDied(doKillAnimation: bool) -> void:
 	if (playerHasDied): return
 	print("Player has died.")
 	playerHasDied = true
+	deathSFX.play()
+	deathSFX.get_parent().remove_child(deathSFX)
+	get_tree().get_root().add_child(deathSFX)
 	if (doKillAnimation):
 		var parentBody: CharacterBody2D = get_parent()
 		parentBody.get_node("CollisionShape2D").call_deferred("queue_free")
