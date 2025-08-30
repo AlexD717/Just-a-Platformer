@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://yelkel11spbs" path="res://scripts/Coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://yai8avwtq2ld" path="res://assets/Spritesheets/spritesheet-tiles-double.png" id="1_rwqht"]
 
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
 atlas = ExtResource("1_rwqht")
 region = Rect2(1920, 1024, 128, 128)
