@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=4 uid="uid://d4k4q337r3ycd"]
+[gd_scene load_steps=15 format=4 uid="uid://d4k4q337r3ycd"]
 
+[ext_resource type="Script" uid="uid://b5fg2ojy0cweq" path="res://scripts/GameManager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://dic7kw2u0oo3r" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://dgujiyjnej62b" path="res://assets/Spritesheets/spritesheet-tiles-default.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bts8o5poooql" path="res://scenes/coin.tscn" id="3_lnu2h"]
@@ -562,12 +563,18 @@ point_count = 3
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("label")]
+unique_name_in_owner = true
+script = ExtResource("1_gee14")
+label = NodePath("../CanvasLayer/Label")
+
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 z_index = 5
-position = Vector2(474, -171)
+position = Vector2(260, 61)
 CAYOTE_TIME = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
 position = Vector2(3, 3)
 offset = Vector2(0, -61.385)
 limit_bottom = 240
@@ -645,3 +652,15 @@ rotation = 1.57079
 [node name="Saw" parent="." instance=ExtResource("7_u5sy4")]
 position = Vector2(626, 65)
 curve = SubResource("Curve2D_u5sy4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+z_index = 100
+offset_left = 17.0
+offset_top = 15.0
+offset_right = 407.0
+offset_bottom = 203.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Score: 0"
