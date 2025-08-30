@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bts8o5poooql"]
+[gd_scene load_steps=9 format=3 uid="uid://bts8o5poooql"]
 
 [ext_resource type="Script" uid="uid://yelkel11spbs" path="res://scripts/Coin.gd" id="1_i64fm"]
 [ext_resource type="Texture2D" uid="uid://yai8avwtq2ld" path="res://assets/Spritesheets/spritesheet-tiles-double.png" id="1_rwqht"]
+[ext_resource type="AudioStream" uid="uid://f0eess6o1vkp" path="res://assets/Sounds/sfx_coin.ogg" id="3_11l1o"]
+[ext_resource type="Script" uid="uid://bwhwqe16vc1ai" path="res://scripts/SFXDestroy.gd" id="4_d14el"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i64fm"]
 atlas = ExtResource("1_rwqht")
@@ -40,5 +42,10 @@ frame_progress = 0.939679
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 1)
 shape = SubResource("CircleShape2D_rwqht")
+
+[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_11l1o")
+bus = &"SFX"
+script = ExtResource("4_d14el")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
