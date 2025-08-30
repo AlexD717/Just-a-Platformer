@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var playerHealth: PlayerHealth = $PlayerHealth
+@onready var jumpSFX: AudioStreamPlayer2D = $JumpSFX
 
 var lastGroundedTime: int = 0
 var isGrounded: bool = false
@@ -27,6 +28,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and CanJump():
 		velocity.y = JUMP_VELOCITY
+		jumpSFX.play()
 
 	# Get the input direction
 	var direction: float = Input.get_axis("MoveLeft", "MoveRight")
